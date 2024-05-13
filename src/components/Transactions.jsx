@@ -5,7 +5,7 @@ function Transactions() {
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/transactions/user', {withCredentials: true})
+        axios.get('http://5.35.85.52:3001/api/transactions/user', {withCredentials: true})
             .then(response => {
                 setTransactions(response.data);
             })

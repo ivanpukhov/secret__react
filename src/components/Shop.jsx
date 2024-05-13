@@ -17,7 +17,7 @@ function Shop() {
         }
 
         try {
-            const result = await axios.post('http://localhost:3001/api/bundles', {
+            const result = await axios.post('http://5.35.85.52:3001/api/bundles', {
                 totalPrice: Number(totalPrice)
             }, {
                 withCredentials: true

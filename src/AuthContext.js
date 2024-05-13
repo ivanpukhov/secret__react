@@ -3,7 +3,7 @@ import axios from 'axios';
 import Swal from "sweetalert2";
 
 // Базовый URL API
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'http://5.35.85.52:3001/api';
 
 // Создание контекста
 const AuthContext = createContext();
