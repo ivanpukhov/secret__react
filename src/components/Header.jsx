@@ -69,9 +69,8 @@ const Header = () => {
                     <Link to='profile' className="burger__item" onClick={toggleBurger}>Личный кабинет</Link>
                     <Link to='/shop' className="burger__item" onClick={toggleBurger}>Биржа</Link>
                     <Link to='/my' className="burger__item" onClick={toggleBurger}>Мой портфель</Link>
-                    <Link className="burger__item" onClick={toggleBurger}>История транзакция</Link>
-                    <div className="burger__item" onClick={toggleBurger}>Главная страница</div>
-                    <div className="burger__item" onClick={toggleBurger}>Правила пользования</div>
+                    <Link to='/history' className="burger__item" onClick={toggleBurger}>История транзакция</Link>
+                    <Link to='/'  className="burger__item" onClick={toggleBurger}>Главная страница</Link>
                 </div>
                 <div className="burger__bottom">
                     <Logout onClick={toggleBurger}/>

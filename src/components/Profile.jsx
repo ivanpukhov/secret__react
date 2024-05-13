@@ -61,7 +61,7 @@ const Profile = () => {
 
                 <Portfolio/>
 
-                <div className="profile__item">
+                <Link to='/history' className="profile__item">
                     <div className="profile__item--text">
                         <div className="profile__item--text-title">
                             Список ваших транзакций
@@ -73,7 +73,7 @@ const Profile = () => {
                     <div className="profile__item-img">
                         <img src={money} alt=""/>
                     </div>
-                </div>
+                </Link>
 
             </div>
         </div>
