@@ -15,13 +15,15 @@ function Transactions() {
     }, []);
 
     return (
-        <div>
+        <div className='history'>
+            <h2>История выводов</h2>
             {transactions.length > 0 ? (
                 transactions.map(transaction => (
-                    <div key={transaction._id}>
+                    <div key={transaction._id} className="history__item">
+
                         <h3>{transaction.type}</h3>
                         <p>ID связки: {transaction.bundleId}</p>
-                        <p>Сумма: {transaction.amount}</p>
+                        <p>Сумма: <b>{transaction.amount}</b> ₸</p>
                         <p>Дата транзакции: {new Date(transaction.transactionDate).toLocaleString()}</p>
                         <p>Статус: {transaction.status}</p>
                     </div>
