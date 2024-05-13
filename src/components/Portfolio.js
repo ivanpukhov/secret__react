@@ -9,7 +9,7 @@ function Portfolio() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://5.35.85.52:3001/api/portfolios', {
+                const response = await axios.get('https://nntnn.ru/api/portfolios', {
                     withCredentials: true
                 });
                 setPortfolios(response.data.map(portfolio => ({
@@ -42,7 +42,7 @@ function Portfolio() {
 
     const handleWithdraw = async (id) => {
         try {
-            const response = await axios.post(`http://5.35.85.52:3001/api/portfolios/bundles/${id}/withdraw-income`, {}, {withCredentials: true});
+            const response = await axios.post(`https://nntnn.ru/api/portfolios/bundles/${id}/withdraw-income`, {}, {withCredentials: true});
             Swal.fire('Успех', `Запрос на вывод процентов отправлен. Сумма: ${response.data.amount} ₸`, 'success');
         } catch (error) {
             Swal.fire('Ошибка', error.message, 'error');
@@ -51,7 +51,7 @@ function Portfolio() {
 
     const handleSell = async (id) => {
         try {
-            const response = await axios.post(`http://5.35.85.52:3001/api/portfolios/bundles/${id}/sell`, {}, {withCredentials: true});
+            const response = await axios.post(`https://nntnn.ru/api/portfolios/bundles/${id}/sell`, {}, {withCredentials: true});
             Swal.fire('Успех', `Запрос на продажу связки отправлен. Сумма: ${response.data.transaction.amount} ₸`, 'success');
         } catch (error) {
             Swal.fire('Ошибка', error.message, 'error');
