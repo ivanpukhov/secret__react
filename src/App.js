@@ -54,20 +54,24 @@ function App() {
             return originalCreateElement(tagName);
         };
 
-        // Блокировка указателей
-        const blockPointerEvents = (e) => {
-            e.stopImmediatePropagation();
-        };
+        // Восстановление pointer-events
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style' && mutation.target.style.pointerEvents === 'none') {
+                    mutation.target.style.pointerEvents = '';
+                }
+            });
+        });
 
-        document.body.addEventListener('pointerdown', blockPointerEvents, true);
-        document.body.addEventListener('pointerup', blockPointerEvents, true);
-        document.body.addEventListener('pointermove', blockPointerEvents, true);
+        observer.observe(document.body, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['style']
+        });
 
         return () => {
             document.removeEventListener('click', blockFileDownload);
-            document.body.removeEventListener('pointerdown', blockPointerEvents, true);
-            document.body.removeEventListener('pointerup', blockPointerEvents, true);
-            document.body.removeEventListener('pointermove', blockPointerEvents, true);
+            observer.disconnect();
             document.createElement = originalCreateElement;
         };
     }, []);
