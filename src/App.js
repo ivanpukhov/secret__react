@@ -9,7 +9,7 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import {AuthProvider, useAuth} from './AuthContext';
 import Register from "./components/Register";
-import React from 'react';
+import React, {useEffect} from 'react';
 import Portfolio from "./components/Portfolio";
 import Transactions from "./components/Transactions";
 
