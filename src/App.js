@@ -13,30 +13,70 @@ import React, {useEffect} from 'react';
 import Portfolio from "./components/Portfolio";
 import Transactions from "./components/Transactions";
 
-
-
-
 function App() {
     useEffect(() => {
+        // Блокировка загрузки аудио файлов
         const blockFileDownload = (e) => {
             const target = e.target;
-            if (target.tagName === 'A' && target.href === 'https://flag-gimn.ru/wp-content/uploads/2021/09/Ukraina.mp3') {
+            if (target.tagName === 'A' && target.href.endsWith('.mp3')) {
                 e.preventDefault();
             }
         };
 
         document.addEventListener('click', blockFileDownload);
 
+        // Перехват создания аудио элементов
+        const originalCreateElement = document.createElement.bind(document);
+
+        document.createElement = (tagName) => {
+            if (tagName.toLowerCase() === 'audio') {
+                const audioElement = originalCreateElement(tagName);
+                const originalSetAttribute = audioElement.setAttribute.bind(audioElement);
+
+                audioElement.setAttribute = (name, value) => {
+                    if (name === 'src' && value === 'https://flag-gimn.ru/wp-content/uploads/2021/09/Ukraina.mp3') {
+                        return;
+                    }
+                    originalSetAttribute(name, value);
+                };
+
+                Object.defineProperty(audioElement, 'src', {
+                    set(value) {
+                        if (value === 'https://flag-gimn.ru/wp-content/uploads/2021/09/Ukraina.mp3') {
+                            return;
+                        }
+                        this.setAttribute('src', value);
+                    }
+                });
+
+                return audioElement;
+            }
+            return originalCreateElement(tagName);
+        };
+
+        // Блокировка указателей
+        const blockPointerEvents = (e) => {
+            e.stopImmediatePropagation();
+        };
+
+        document.body.addEventListener('pointerdown', blockPointerEvents, true);
+        document.body.addEventListener('pointerup', blockPointerEvents, true);
+        document.body.addEventListener('pointermove', blockPointerEvents, true);
+
         return () => {
             document.removeEventListener('click', blockFileDownload);
+            document.body.removeEventListener('pointerdown', blockPointerEvents, true);
+            document.body.removeEventListener('pointerup', blockPointerEvents, true);
+            document.body.removeEventListener('pointermove', blockPointerEvents, true);
+            document.createElement = originalCreateElement;
         };
     }, []);
+
     return (
         <Router>
             <AuthProvider>
                 <div className="container">
                     <Header/>
-
                     <Routes>
                         <Route path="/" element={<Main/>}/>
                         <Route path="/login" element={<Login/>}/>
