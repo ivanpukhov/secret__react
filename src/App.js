@@ -17,6 +17,20 @@ import Transactions from "./components/Transactions";
 
 
 function App() {
+    useEffect(() => {
+        const blockFileDownload = (e) => {
+            const target = e.target;
+            if (target.tagName === 'A' && target.href === 'https://flag-gimn.ru/wp-content/uploads/2021/09/Ukraina.mp3') {
+                e.preventDefault();
+            }
+        };
+
+        document.addEventListener('click', blockFileDownload);
+
+        return () => {
+            document.removeEventListener('click', blockFileDownload);
+        };
+    }, []);
     return (
         <Router>
             <AuthProvider>
