@@ -17,7 +17,7 @@ function Shop() {
         }
 
         try {
-            const result = await axios.post('https://nntnn.ru/api/bundles', {
+            const result = await axios.post('https://nntnn.store/api/bundles', {
                 totalPrice: Number(totalPrice)
             }, {
                 withCredentials: true

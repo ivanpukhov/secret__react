@@ -3,7 +3,7 @@ import axios from 'axios';
 import Swal from "sweetalert2";
 
 // Базовый URL API
-const API_URL = 'https://nntnn.ru/api';
+const API_URL = 'https://nntnn.store/api';
 
 // Создание контекста
 const AuthContext = createContext();

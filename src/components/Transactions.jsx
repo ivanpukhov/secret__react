@@ -5,7 +5,7 @@ function Transactions() {
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
-        axios.get('https://nntnn.ru/api/transactions/user', {withCredentials: true})
+        axios.get('https://nntnn.store/api/transactions/user', {withCredentials: true})
             .then(response => {
                 setTransactions(response.data);
             })

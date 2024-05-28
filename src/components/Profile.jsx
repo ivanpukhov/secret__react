@@ -13,7 +13,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchUnpaidBundles = async () => {
             try {
-                const response = await axios.get('https://nntnn.ru/api/user', {
+                const response = await axios.get('https://nntnn.store/api/user', {
                     withCredentials: true
                 });
                 setProfile(response.data);
